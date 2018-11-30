@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <ol>
+        <li>Add A button which says 'Display Details'</li>
+        <li>Add a paragraph with any content of your choice (e.g. 'Secret Password = tuna')</li>
+        <li>Toggle the displaying of that paragraph with the button created in the first step</li>
+        <li>Log all button clicks in an array and output that array below the secret paragraph (maybe log a timestamp or simply an incrementing number)</li>
+        <li>Starting at the 5th log item, give all future log items a blue background (via ngStyle) and white color (ngClass)</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+      <button type="button" class="btn btn-primary btn-lg btn-block" (click)="changePasswordToggle()" >
+        Display Details
+      </button>
+      <hr/>
+  </div>
+  <div class="row" [hidden]="passwordToggle">
+    <div class="alert alert-danger text-center" role="alert">
+      Secret Password = <b>bla bla</b>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th style="width: 40%">Timestamp</th>
+          <th style="width: 60%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of actionsLog; let rownum = index"
+            [ngStyle]="{'background-color': isLogThresholdReached(rownum) ? 'blue' : 'white'}"
+            [ngClass]="{'text-color-white': isLogThresholdReached(rownum)}"
+        >
+          <td>{{log.dt}}</td>
+          <td>{{log.action}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
